@@ -30,7 +30,7 @@ namespace Catalog.API.Product.UpdateProduct
             var product = await session.LoadAsync<Models.Product>(command.Id, cancellationToken);
             if (product is null)
             {
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(command.Id);
             }
             product.Name=command.Name;
             product.Description=command.Description;
