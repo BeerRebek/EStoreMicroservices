@@ -16,12 +16,12 @@ namespace Catalog.API.Product.DeleteProduct
         }
     }
     internal class DeleteProductByIdCommandHandler
-        (IDocumentSession session, ILogger<DeleteProductByIdCommandHandler> logger) 
+        (IDocumentSession session) 
         :ICommandHandler<DeleteProductCommand, DeleteProductResult>
     {
         public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
         {
-            logger.LogInformation("\"DeleteProductHandler Handle called with {@Command}", command);
+            
 
             var product = await session.LoadAsync<Models.Product>(command.Id, cancellationToken); 
             if (product is null) 

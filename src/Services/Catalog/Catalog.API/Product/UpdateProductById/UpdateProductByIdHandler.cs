@@ -18,11 +18,11 @@ namespace Catalog.API.Product.UpdateProductById
             RuleFor(command => command.Price).GreaterThan(0).WithMessage("Price must be greater then 0");
         }
     }
-    public class UpdateProductByIdHandler(IDocumentSession session, ILogger<UpdateProductByIdHandler> logger) : ICommandHandler<UpdateProductByIdCommand, UpdateProductByIdResult>
+    public class UpdateProductByIdHandler(IDocumentSession session) : ICommandHandler<UpdateProductByIdCommand, UpdateProductByIdResult>
     {
         public async Task<UpdateProductByIdResult> Handle(UpdateProductByIdCommand command, CancellationToken cancellationToken)
         {
-            logger.LogInformation("UpdateProductByIdHandler Handle called with {@Command}", command);
+            
 
             var product = await session.LoadAsync<Models.Product>(command.Id,cancellationToken);
             if (product is null)
